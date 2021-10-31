@@ -1,8 +1,9 @@
 import express, { Request } from 'express';
 import 'dotenv/config';
 
-import validFlow from 'flowValidator';
-import validAlert from 'alertValidator';
+import { Flow, Alert } from 'validators/validator';
+import { validFlow } from 'validators/flowValidator';
+import { validAlert } from 'validators/alertValidator';
 
 const createServer = () => {
   const port = process.env.DATA_HANDLER_PORT;
@@ -13,17 +14,17 @@ const createServer = () => {
   app.use(express.json());
 
   app.post('/flow', (req: Request) => {
-    const body = req.body as string;
+    const flow = req.body as Flow;
 
-    if (validFlow(body)) {
+    if (validFlow(flow)) {
       // post to mongo
     }
   });
 
   app.post('/alert', (req: Request) => {
-    const body = req.body as string;
+    const alert = req.body as Alert;
 
-    if (validAlert(body)) {
+    if (validAlert(alert)) {
       // post to mongo
     }
   });
@@ -34,4 +35,4 @@ const createServer = () => {
   });
 };
 
-export default createServer;
+export { createServer };

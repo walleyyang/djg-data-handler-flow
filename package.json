@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_PATH=./dist node dist/index.js",
-    "build": "tsc -p .",
+    "build": "tsc -p tsconfig-build.json",
     "dev": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register src/index.ts",
     "lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
     "prepare": "husky install",

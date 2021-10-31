@@ -1,6 +1,6 @@
-const validFlow = (flowString: string) => {
-  const flow = JSON.parse(flowString) as JSON;
+import { Flow } from 'validators/validator';
 
+const validFlow = (flow: Flow) => {
   return containsMessageType(flow) &&
     containsTime(flow) &&
     containsSymbol(flow) &&
@@ -18,56 +18,56 @@ const validFlow = (flowString: string) => {
     : false;
 };
 
-const containsMessageType = (flow: JSON) => {
+const containsMessageType = (flow: Flow) => {
   return flow.hasOwnProperty('messageType');
 };
 
-const containsTime = (flow: JSON) => {
+const containsTime = (flow: Flow) => {
   return flow.hasOwnProperty('time');
 };
 
-const containsSymbol = (flow: JSON) => {
+const containsSymbol = (flow: Flow) => {
   return flow.hasOwnProperty('symbol');
 };
 
-const containsExpiration = (flow: JSON) => {
+const containsExpiration = (flow: Flow) => {
   return flow.hasOwnProperty('expiration');
 };
 
-const containsStrike = (flow: JSON) => {
+const containsStrike = (flow: Flow) => {
   return flow.hasOwnProperty('strike');
 };
 
-const containsPosition = (flow: JSON) => {
+const containsPosition = (flow: Flow) => {
   return flow.hasOwnProperty('position');
 };
 
-const containsStockPrice = (flow: JSON) => {
+const containsStockPrice = (flow: Flow) => {
   return flow.hasOwnProperty('stockPrice');
 };
 
-const containsDetails = (flow: JSON) => {
+const containsDetails = (flow: Flow) => {
   return flow.hasOwnProperty('details');
 };
 
-const containsType = (flow: JSON) => {
+const containsType = (flow: Flow) => {
   return flow.hasOwnProperty('type');
 };
 
-const containsValue = (flow: JSON) => {
+const containsValue = (flow: Flow) => {
   return flow.hasOwnProperty('value');
 };
 
-const containsEstimatedValue = (flow: JSON) => {
+const containsEstimatedValue = (flow: Flow) => {
   return flow.hasOwnProperty('estimatedValue');
 };
 
-const containsGoldenSweep = (flow: JSON) => {
+const containsGoldenSweep = (flow: Flow) => {
   return flow.hasOwnProperty('goldenSweep');
 };
 
-const containsSentiment = (flow: JSON) => {
+const containsSentiment = (flow: Flow) => {
   return flow.hasOwnProperty('sentiment');
 };
 
-export default validFlow;
+export { validFlow };
