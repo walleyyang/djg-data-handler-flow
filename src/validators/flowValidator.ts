@@ -1,7 +1,8 @@
 import { Flow } from 'validators/validator';
 
 const validFlow = (flow: Flow) => {
-  return containsMessageType(flow) &&
+  return containsFlowLength(flow) &&
+    containsMessageType(flow) &&
     containsTime(flow) &&
     containsSymbol(flow) &&
     containsExpiration(flow) &&
@@ -16,6 +17,11 @@ const validFlow = (flow: Flow) => {
     containsSentiment(flow)
     ? true
     : false;
+};
+
+const containsFlowLength = (flow: Flow) => {
+  const length = 13;
+  return Object.keys(flow).length === length ? true : false;
 };
 
 const containsMessageType = (flow: Flow) => {

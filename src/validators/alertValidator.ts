@@ -1,7 +1,8 @@
 import { Alert } from 'validators/validator';
 
 const validAlert = (alert: Alert) => {
-  return containsMessageType(alert) &&
+  return containsAlertLength(alert) &&
+    containsMessageType(alert) &&
     containsTime(alert) &&
     containsSymbol(alert) &&
     containsExpiration(alert) &&
@@ -11,6 +12,11 @@ const validAlert = (alert: Alert) => {
     containsSentiment(alert)
     ? true
     : false;
+};
+
+const containsAlertLength = (alert: Alert) => {
+  const length = 8;
+  return Object.keys(alert).length === length ? true : false;
 };
 
 const containsMessageType = (alert: Alert) => {
