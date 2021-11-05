@@ -1,79 +1,79 @@
-import { Flow } from 'validators/validator';
+import { ModifiedFlow } from 'common/models';
 
-const validFlow = (flow: Flow) => {
-  return containsFlowLength(flow) &&
-    containsMessageType(flow) &&
-    containsTime(flow) &&
-    containsSymbol(flow) &&
-    containsExpiration(flow) &&
-    containsStrike(flow) &&
-    containsPosition(flow) &&
-    containsStockPrice(flow) &&
-    containsDetails(flow) &&
-    containsType(flow) &&
-    containsValue(flow) &&
-    containsEstimatedValue(flow) &&
-    containsGoldenSweep(flow) &&
-    containsSentiment(flow)
+const validFlow = (modifiedFlow: ModifiedFlow) => {
+  return containsFlowLength(modifiedFlow) &&
+    containsMessageType(modifiedFlow) &&
+    containsTime(modifiedFlow) &&
+    containsSymbol(modifiedFlow) &&
+    containsExpiration(modifiedFlow) &&
+    containsStrike(modifiedFlow) &&
+    containsPosition(modifiedFlow) &&
+    containsStockPrice(modifiedFlow) &&
+    containsDetails(modifiedFlow) &&
+    containsType(modifiedFlow) &&
+    containsValue(modifiedFlow) &&
+    containsEstimatedValue(modifiedFlow) &&
+    containsSentiment(modifiedFlow) &&
+    containsGoldenSweep(modifiedFlow)
     ? true
     : false;
 };
 
-const containsFlowLength = (flow: Flow) => {
+const containsFlowLength = (modifiedFlow: ModifiedFlow) => {
   const length = 13;
-  return Object.keys(flow).length === length ? true : false;
+  return Object.keys(modifiedFlow).length === length ? true : false;
 };
 
-const containsMessageType = (flow: Flow) => {
-  return flow.hasOwnProperty('messageType');
+const containsMessageType = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('messageType');
 };
 
-const containsTime = (flow: Flow) => {
-  return flow.hasOwnProperty('time');
+const containsTime = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('time');
 };
 
-const containsSymbol = (flow: Flow) => {
-  return flow.hasOwnProperty('symbol');
+const containsSymbol = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('symbol');
 };
 
-const containsExpiration = (flow: Flow) => {
-  return flow.hasOwnProperty('expiration');
+const containsExpiration = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('expiration');
 };
 
-const containsStrike = (flow: Flow) => {
-  return flow.hasOwnProperty('strike');
+const containsStrike = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('strike');
 };
 
-const containsPosition = (flow: Flow) => {
-  return flow.hasOwnProperty('position');
+const containsPosition = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('position');
 };
 
-const containsStockPrice = (flow: Flow) => {
-  return flow.hasOwnProperty('stockPrice');
+const containsStockPrice = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('stockPrice');
 };
 
-const containsDetails = (flow: Flow) => {
-  return flow.hasOwnProperty('details');
+const containsDetails = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('details');
 };
 
-const containsType = (flow: Flow) => {
-  return flow.hasOwnProperty('type');
+const containsType = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('type');
 };
 
-const containsValue = (flow: Flow) => {
-  return flow.hasOwnProperty('value');
+const containsValue = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('value');
 };
 
-const containsEstimatedValue = (flow: Flow) => {
-  return flow.hasOwnProperty('estimatedValue');
+const containsEstimatedValue = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('estimatedValue');
 };
 
-const containsGoldenSweep = (flow: Flow) => {
-  return flow.hasOwnProperty('goldenSweep');
+const containsGoldenSweep = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('goldenSweep');
 };
 
-const containsSentiment = (flow: Flow) => {
-  return flow.hasOwnProperty('sentiment');
+const containsSentiment = (modifiedFlow: ModifiedFlow) => {
+  return modifiedFlow.hasOwnProperty('sentiment');
 };
 
 export { validFlow };

@@ -1,4 +1,4 @@
-import { Alert } from 'validators/validator';
+import { Alert } from 'common/models';
 
 const validAlert = (alert: Alert) => {
   return containsAlertLength(alert) &&

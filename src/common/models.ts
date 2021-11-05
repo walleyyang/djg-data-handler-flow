@@ -9,6 +9,19 @@ export interface Flow {
   details: string;
   type: string;
   value: string;
+}
+
+export interface ModifiedFlow {
+  messageType: string;
+  time: string;
+  symbol: string;
+  expiration: string;
+  strike: number;
+  position: string;
+  stockPrice: number;
+  details: string;
+  type: string;
+  value: string;
   estimatedValue: number;
   goldenSweep: boolean;
   sentiment: string;
