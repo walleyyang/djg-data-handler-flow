@@ -203,6 +203,23 @@ describe('modified flow put sentiment checks', () => {
     ) as Flow,
   );
 
+  const none = modifyFlow(
+    JSON.parse(
+      JSON.stringify({
+        messageType: 'FLOW',
+        time: '11:15:50',
+        symbol: 'SPY',
+        expiration: '11/11/2021',
+        strike: 500,
+        position: 'PUT',
+        stockPrice: 445,
+        details: '450@10.00',
+        type: 'SWEEP',
+        value: '$10.5K',
+      }),
+    ) as Flow,
+  );
+
   it('should contain bearish sentiment for ask put', () => {
     expect(askPut.sentiment).to.equal(Sentiment.BEARISH);
   });
@@ -217,6 +234,10 @@ describe('modified flow put sentiment checks', () => {
 
   it('should contain bullish sentiment for below bid put', () => {
     expect(belowBidPut.sentiment).to.equal(Sentiment.BULLISH);
+  });
+
+  it('should contain position sentiment for none', () => {
+    expect(none.sentiment).to.equal(Sentiment.BEARISH);
   });
 });
 
