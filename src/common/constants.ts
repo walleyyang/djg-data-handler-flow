@@ -9,8 +9,6 @@ const millisecondsInSecond = config.millisecondsInSecond;
 const maxGoldenSweepDayAsMilliseconds = secondsInDay * millisecondsInSecond * maxGoldenSweepDays;
 const maxGoldenSweepDayMilliseconds = Date.now() + maxGoldenSweepDayAsMilliseconds;
 
-const largeValueFlowStocks = config.largeValueFlowStocks;
-const validStocks = config.validStocks;
 const minValue = config.minValue;
 const minLargeValueFlowStockValue = config.minLargeValueFlowStockValue;
 const maxDays = config.maxDays;
@@ -24,8 +22,6 @@ export const flowConfig = {
   millisecondsInSecond: millisecondsInSecond,
   maxGoldenSweepDayAsMilliseconds: maxGoldenSweepDayAsMilliseconds,
   maxGoldenSweepDayMilliseconds: maxGoldenSweepDayMilliseconds,
-  largeValueFlowStocks: largeValueFlowStocks,
-  validStocks: validStocks,
   minValue: minValue,
   minLargeValueFlowStockValue: minLargeValueFlowStockValue,
   maxDays: maxDays,

@@ -4,14 +4,13 @@ import { Flow, Alert } from 'common/models';
 import { modifyFlow } from 'modifiers/flowModifier';
 import { validFlow } from 'validators/flowValidator';
 import { validAlert } from 'validators/alertValidator';
-import { validFlowMessage } from 'validators/validFlowMessage';
 import { databaseFlowHandler, databaseConnect } from 'database/databaseHandler';
 import { dataHandlerPort } from 'common/constants';
 
 const app = express();
 
 const createServer = () => {
-  void databaseConnect();
+  // void databaseConnect();
 
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
@@ -20,12 +19,10 @@ const createServer = () => {
     const modifiedFlow = modifyFlow(req.body as Flow);
 
     if (validFlow(modifiedFlow)) {
-      databaseFlowHandler(modifiedFlow);
+      // databaseFlowHandler(modifiedFlow);
 
-      if (validFlowMessage(modifiedFlow)) {
-        console.log('send flow to datjuanitagurl');
-        console.log(modifiedFlow);
-      }
+      console.log('send flow to datjuanitagurl');
+      console.log(modifiedFlow);
     }
   });
 

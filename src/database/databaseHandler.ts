@@ -5,7 +5,6 @@ import { Flow, Alert, ModifiedFlow } from 'common/models';
 import { modifyFlow } from 'modifiers/flowModifier';
 import { validFlow } from 'validators/flowValidator';
 import { validAlert } from 'validators/alertValidator';
-import { validFlowMessage } from 'validators/validFlowMessage';
 import { mongo } from 'common/constants';
 
 // const client = new MongoClient(MONGO_URI);
