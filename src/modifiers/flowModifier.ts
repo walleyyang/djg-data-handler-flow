@@ -39,7 +39,7 @@ const getEstimatedValue = (flow: Flow) => {
 Thoughts on assuming the bid and below bid side for bullish calls and bearish puts. Assumed position is long based on below. 
   Otherwise assumed short, closing, spreads, hedge, etc.
   - Sweeps: shows sense of urgency
-  - Max Expiration Day: Within next expiration (default 7) which most flow traders will probably trade next expiration. Shows sense of urgency.
+  - Max Expiration Day: Within next expiration (default 14) which most flow traders will probably trade next expiration. Shows sense of urgency.
   - Percentage difference between strike and stock price at transaction: This number is more arbitrary. Used 34 as the 
       default (half a standard deviation). Naked longs tend to favor 30 deltas because it seems to be the sweet spot for 
       most gains (s curve instead of linear) and maybe even debit spreads.
