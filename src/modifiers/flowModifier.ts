@@ -64,7 +64,7 @@ const getSentiment = (flow: Flow) => {
   if (letters === undefined || letters.includes(verifyLetter)) {
     sentiment = position === Position.CALL ? Sentiment.BULLISH : Sentiment.BEARISH;
   } else {
-    // Assume long positions for bid or below unless criterias are not met
+    // Assume long positions for bid or below bid unless criterias are not met
     if (position === Position.CALL) {
       sentiment =
         type === Type.SWEEP && validPercentage && validMaxDays && strike > stockPrice
