@@ -1,6 +1,6 @@
 import { Sentiment, Position, Type } from 'common/enums';
 import { Flow, ModifiedFlow } from 'common/models';
-import { minGoldenSweepValue, maxGoldenSweepDayMilliseconds } from 'common/constants';
+import { flowConfig } from 'common/constants';
 
 // Modify initial flow with additional information.
 const modifyFlow = (flow: Flow): ModifiedFlow => {
@@ -56,8 +56,8 @@ const getSentiment = (flow: Flow) => {
 const isGoldenSweep = (flow: Flow, estimatedValue: number) => {
   const type = flow.type;
   const expiration = flow.expiration;
-  const validValueType = estimatedValue >= minGoldenSweepValue && type === Type.SWEEP;
-  const validExpiration = maxGoldenSweepDayMilliseconds - Date.parse(expiration) >= 1;
+  const validValueType = estimatedValue >= flowConfig.minGoldenSweepValue && type === Type.SWEEP;
+  const validExpiration = flowConfig.maxGoldenSweepDayMilliseconds - Date.parse(expiration) >= 1;
 
   return validValueType && validExpiration;
 };

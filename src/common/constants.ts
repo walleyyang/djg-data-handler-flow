@@ -1,16 +1,62 @@
+import 'dotenv/config';
+
 import config from '../../config.json';
 
-export const minGoldenSweepValue = config.minGoldenSweepValue;
-export const maxGoldenSweepDays = config.maxGoldenSweepDays;
-export const secondsInDay = config.secondsInDay;
-export const millisecondsInSecond = config.millisecondsInSecond;
-export const maxGoldenSweepDayAsMilliseconds = secondsInDay * millisecondsInSecond * maxGoldenSweepDays;
-export const maxGoldenSweepDayMilliseconds = Date.now() + maxGoldenSweepDayAsMilliseconds;
+const minGoldenSweepValue = config.minGoldenSweepValue;
+const maxGoldenSweepDays = config.maxGoldenSweepDays;
+const secondsInDay = config.secondsInDay;
+const millisecondsInSecond = config.millisecondsInSecond;
+const maxGoldenSweepDayAsMilliseconds = secondsInDay * millisecondsInSecond * maxGoldenSweepDays;
+const maxGoldenSweepDayMilliseconds = Date.now() + maxGoldenSweepDayAsMilliseconds;
 
-export const largeValueFlowStocks = config.largeValueFlowStocks;
-export const validStocks = config.validStocks;
-export const minValue = config.minValue;
-export const minLargeValueFlowStockValue = config.minLargeValueFlowStockValue;
-export const maxDays = config.maxDays;
-export const maxDayAsMilliseconds = secondsInDay * millisecondsInSecond * maxDays;
-export const maxDayMilliseconds = Date.now() + maxDayAsMilliseconds;
+const largeValueFlowStocks = config.largeValueFlowStocks;
+const validStocks = config.validStocks;
+const minValue = config.minValue;
+const minLargeValueFlowStockValue = config.minLargeValueFlowStockValue;
+const maxDays = config.maxDays;
+const maxDayAsMilliseconds = secondsInDay * millisecondsInSecond * maxDays;
+const maxDayMilliseconds = Date.now() + maxDayAsMilliseconds;
+
+export const flowConfig = {
+  minGoldenSweepValue: minGoldenSweepValue,
+  maxGoldenSweepDays: maxGoldenSweepDays,
+  secondsInDay: secondsInDay,
+  millisecondsInSecond: millisecondsInSecond,
+  maxGoldenSweepDayAsMilliseconds: maxGoldenSweepDayAsMilliseconds,
+  maxGoldenSweepDayMilliseconds: maxGoldenSweepDayMilliseconds,
+  largeValueFlowStocks: largeValueFlowStocks,
+  validStocks: validStocks,
+  minValue: minValue,
+  minLargeValueFlowStockValue: minLargeValueFlowStockValue,
+  maxDays: maxDays,
+  maxDayAsMilliseconds: maxDayAsMilliseconds,
+  maxDayMilliseconds: maxDayMilliseconds,
+};
+
+export const dataHandlerPort = process.env.DH_PORT || '';
+
+const mongoOptions = {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  socketTimeoutMS: 30000,
+  keepAlive: true,
+  poolSiZe: 50,
+  autoIndex: false,
+  retryWrites: false,
+};
+const mongoUsername = process.env.MONGO_INITDB_ROOT_USERNAME || '';
+const mongoPassword = process.env.MONGO_INITDB_ROOT_PASSWORD || '';
+const mongoHost = process.env.MONGO || '';
+const mongoPort = process.env.MONGO_PORT || '';
+const mongoDatabase = process.env.MONGO_INITDB_DATABASE || '';
+const mongoCollection = process.env.MONGO_COLLECTION || '';
+const mongoUrl = `mongodb://${mongoUsername}:${mongoPassword}@${mongoHost}:${mongoPort}/${mongoDatabase}`;
+
+export const mongo = {
+  host: mongoHost,
+  username: mongoUsername,
+  password: mongoPassword,
+  options: mongoOptions,
+  url: mongoUrl,
+  collection: mongoCollection,
+};

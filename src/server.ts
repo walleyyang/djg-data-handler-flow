@@ -1,16 +1,17 @@
-import express, { Request, Response } from 'express';
-import 'dotenv/config';
+import express, { Request } from 'express';
 
 import { Flow, Alert } from 'common/models';
 import { modifyFlow } from 'modifiers/flowModifier';
 import { validFlow } from 'validators/flowValidator';
 import { validAlert } from 'validators/alertValidator';
 import { validFlowMessage } from 'validators/validFlowMessage';
+import { databaseFlowHandler, databaseConnect } from 'database/databaseHandler';
+import { dataHandlerPort } from 'common/constants';
+
+const app = express();
 
 const createServer = () => {
-  const port = process.env.DATA_HANDLER_PORT || '';
-
-  const app = express();
+  void databaseConnect();
 
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
@@ -19,8 +20,8 @@ const createServer = () => {
     const modifiedFlow = modifyFlow(req.body as Flow);
 
     if (validFlow(modifiedFlow)) {
-      // post to mongo
-      console.log('post flow to mongo...');
+      databaseFlowHandler(modifiedFlow);
+
       if (validFlowMessage(modifiedFlow)) {
         console.log('send flow to datjuanitagurl');
         console.log(modifiedFlow);
@@ -39,8 +40,8 @@ const createServer = () => {
     }
   });
 
-  return app.listen(port, () => {
-    console.log(`DJG Data Handler listening on port: ${port}`);
+  return app.listen(dataHandlerPort, () => {
+    console.log(`DJG Data Handler server listening on port: ${dataHandlerPort}`);
   });
 };
 

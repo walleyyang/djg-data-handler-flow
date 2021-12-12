@@ -1,12 +1,6 @@
 import { Type } from 'common/enums';
 import { ModifiedFlow } from 'common/models';
-import {
-  validStocks,
-  maxDayMilliseconds,
-  largeValueFlowStocks,
-  minLargeValueFlowStockValue,
-  minValue,
-} from 'common/constants';
+import { flowConfig } from 'common/constants';
 
 // A valid flow message should be within filtered parameters.
 const validFlowMessage = (modifiedFlow: ModifiedFlow) => {
@@ -27,17 +21,17 @@ const isValidMessage = (modifiedFlow: ModifiedFlow) => {
   const type = modifiedFlow.type;
 
   const validExpiration = isExpirationWithinFilteredDay(expiration);
-  const validStock = validStocks.includes(symbol);
-  const validValue = largeValueFlowStocks.includes(symbol)
-    ? estimatedValue >= minLargeValueFlowStockValue
-    : estimatedValue >= minValue;
+  const validStock = flowConfig.validStocks.includes(symbol);
+  const validValue = flowConfig.largeValueFlowStocks.includes(symbol)
+    ? estimatedValue >= flowConfig.minLargeValueFlowStockValue
+    : estimatedValue >= flowConfig.minValue;
   const validType = type === Type.SWEEP ? true : false;
 
   return isGoldenSweep ? true : validExpiration && validStock && validValue && validType;
 };
 
 const isExpirationWithinFilteredDay = (expiration: string) => {
-  return maxDayMilliseconds - Date.parse(expiration) >= 1;
+  return flowConfig.maxDayMilliseconds - Date.parse(expiration) >= 1;
 };
 
 export { validFlowMessage };
