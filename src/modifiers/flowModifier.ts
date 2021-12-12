@@ -35,19 +35,47 @@ const getEstimatedValue = (flow: Flow) => {
   return parseInt(numeric);
 };
 
-// Assume ask or above ask puts are bearish and calls are bullish
-// Assume bid or below bid puts are bullish and calls are bearish
+/*
+Thoughts on assuming the bid and below bid side for bullish calls and bearish puts. Assumed position is long based on below. 
+  Otherwise assumed short, closing, spreads, hedge, etc.
+  - Sweeps: shows sense of urgency
+  - Max Expiration Day: Within next expiration (default 7) which most flow traders will probably trade next expiration. Shows sense of urgency.
+  - Percentage difference between strike and stock price at transaction: This number is more arbitrary. Used 34 as the 
+      default (half a standard deviation). Naked longs tend to favor 30 deltas because it seems to be the sweet spot for 
+      most gains (s curve instead of linear) and maybe even debit spreads.
+  - Call Stock Price: Call strike should be higher than stock price at transaction with the intention to move ITM.
+  - Put Stock Price: Put strike should be lower than stock price at transaction with the intention to move ITM.
+*/
 const getSentiment = (flow: Flow) => {
   const position = flow.position;
   const details = flow.details;
+  const type = flow.type;
+  const strike = flow.strike;
+  const stockPrice = flow.stockPrice;
+  const validPercentage =
+    100 * Math.abs((flow.strike - flow.stockPrice) / ((flow.strike + flow.stockPrice) / 2)) <=
+    flowConfig.sentimentPercentageThreshold;
+  const validMaxDays = flowConfig.sentimentMaxDaysThresholdMaxDayMilliseconds - Date.parse(flow.expiration) >= 1;
   const letters = details.split(' ')[1];
   const verifyLetter = 'A';
   let sentiment = '';
 
-  if (position === Position.CALL) {
-    sentiment = letters === undefined || letters.includes(verifyLetter) ? Sentiment.BULLISH : Sentiment.BEARISH;
+  // Assume ask or above ask calls are bullish and puts are bearish
+  if (letters === undefined || letters.includes(verifyLetter)) {
+    sentiment = position === Position.CALL ? Sentiment.BULLISH : Sentiment.BEARISH;
   } else {
-    sentiment = letters === undefined || letters.includes(verifyLetter) ? Sentiment.BEARISH : Sentiment.BULLISH;
+    // Assume long positions for bid or below unless criterias are not met
+    if (position === Position.CALL) {
+      sentiment =
+        type === Type.SWEEP && validPercentage && validMaxDays && strike > stockPrice
+          ? Sentiment.BULLISH
+          : Sentiment.BEARISH;
+    } else {
+      sentiment =
+        type === Type.SWEEP && validPercentage && validMaxDays && strike < stockPrice
+          ? Sentiment.BEARISH
+          : Sentiment.BULLISH;
+    }
   }
 
   return sentiment;

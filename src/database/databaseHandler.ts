@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import 'dotenv/config';
 
 import { Flow, Alert, ModifiedFlow } from 'common/models';
 import { modifyFlow } from 'modifiers/flowModifier';

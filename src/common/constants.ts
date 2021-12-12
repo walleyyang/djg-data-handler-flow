@@ -1,32 +1,21 @@
 import 'dotenv/config';
 
-import config from '../../config.json';
-
-const minGoldenSweepValue = config.minGoldenSweepValue;
-const maxGoldenSweepDays = config.maxGoldenSweepDays;
-const secondsInDay = config.secondsInDay;
-const millisecondsInSecond = config.millisecondsInSecond;
+const secondsInDay = 86400;
+const millisecondsInSecond = 1000;
+const sentimentPercentageThreshold = Number(process.env.DH_SENTIMENT_PERCENTAGE_THRESHOLD || 0);
+const sentimentMaxDaysThreshold = Number(process.env.DH_SENTIMENT_MAX_DAYS_THRESHOLD || 0);
+const sentimentMaxDaysThresholdAsMilliseconds = secondsInDay * millisecondsInSecond * sentimentMaxDaysThreshold;
+const sentimentMaxDaysThresholdMaxDayMilliseconds = Date.now() + sentimentMaxDaysThresholdAsMilliseconds;
+const minGoldenSweepValue = process.env.DH_MIN_GOLDEN_SWEEP_VALUE || 0;
+const maxGoldenSweepDays = Number(process.env.DH_MAX_GOLDEN_SWEEP_DAYS || 0);
 const maxGoldenSweepDayAsMilliseconds = secondsInDay * millisecondsInSecond * maxGoldenSweepDays;
 const maxGoldenSweepDayMilliseconds = Date.now() + maxGoldenSweepDayAsMilliseconds;
 
-const minValue = config.minValue;
-const minLargeValueFlowStockValue = config.minLargeValueFlowStockValue;
-const maxDays = config.maxDays;
-const maxDayAsMilliseconds = secondsInDay * millisecondsInSecond * maxDays;
-const maxDayMilliseconds = Date.now() + maxDayAsMilliseconds;
-
 export const flowConfig = {
+  sentimentPercentageThreshold: sentimentPercentageThreshold,
+  sentimentMaxDaysThresholdMaxDayMilliseconds: sentimentMaxDaysThresholdMaxDayMilliseconds,
   minGoldenSweepValue: minGoldenSweepValue,
-  maxGoldenSweepDays: maxGoldenSweepDays,
-  secondsInDay: secondsInDay,
-  millisecondsInSecond: millisecondsInSecond,
-  maxGoldenSweepDayAsMilliseconds: maxGoldenSweepDayAsMilliseconds,
   maxGoldenSweepDayMilliseconds: maxGoldenSweepDayMilliseconds,
-  minValue: minValue,
-  minLargeValueFlowStockValue: minLargeValueFlowStockValue,
-  maxDays: maxDays,
-  maxDayAsMilliseconds: maxDayAsMilliseconds,
-  maxDayMilliseconds: maxDayMilliseconds,
 };
 
 export const dataHandlerPort = process.env.DH_PORT || '';
