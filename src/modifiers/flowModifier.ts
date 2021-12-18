@@ -1,6 +1,6 @@
 import { Sentiment, Position, Type } from 'common/enums';
 import { Flow, ModifiedFlow } from 'common/models';
-import { flowConfig } from 'common/constants';
+import { flowConfig } from 'common/config';
 
 // Modify initial flow with additional information.
 const modifyFlow = (flow: Flow): ModifiedFlow => {

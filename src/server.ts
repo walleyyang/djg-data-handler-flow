@@ -4,7 +4,7 @@ import { Flow, Alert } from 'common/models';
 import { modifyFlow } from 'modifiers/flowModifier';
 import { validFlow } from 'validators/flowValidator';
 import { validAlert } from 'validators/alertValidator';
-import { dataHandlerPort } from 'common/constants';
+import { dataHandlerPort } from 'common/config';
 
 const app = express();
 
